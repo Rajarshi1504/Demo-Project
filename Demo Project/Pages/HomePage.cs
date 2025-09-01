@@ -28,6 +28,7 @@ namespace Demo_Project.Pages
         private By countryDropdown => By.XPath($"//select[@id='country']");
         private By simpleAlertButton => By.Id("alertBtn");
         private By confirmAlertButton => By.Id("confirmBtn");
+        private By popupWindowButton => By.Id("PopUp");
 
         public void EnterName(string Name)
         {
@@ -107,6 +108,24 @@ namespace Demo_Project.Pages
         public void clickOnCancelAlert()
         {
             dismissAlert();
+        }
+        public void clickOnOpenWindowButton()
+        {
+            var openWindowButton = driver.FindElement(popupWindowButton);
+            openWindowButton.Click();
+        }
+
+        public void switchToNewWindow()
+        {
+            // driver.SwitchTo().NewWindow(WindowType.Window);
+            var window2 = driver.CurrentWindowHandle;
+            driver.SwitchTo().Window(window2);
+        }
+
+        public void switchToParentWindow()
+        {
+            var parentWindow = driver.WindowHandles.First();
+            driver.SwitchTo().Window(parentWindow);
         }
     }
 }

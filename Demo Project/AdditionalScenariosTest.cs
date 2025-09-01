@@ -37,5 +37,15 @@ namespace Demo_Project
             homePage.clickOnCancelAlert();
             Thread.Sleep(2000);
         }
+        [Test]
+        public void handleWindows()
+        {
+            homePage.clickOnOpenWindowButton();
+            Thread.Sleep(2000);
+            homePage.switchToNewWindow();
+            Thread.Sleep(2000);
+            homePage.switchToParentWindow();
+            Thread.Sleep(2000);
+        }
     }
 }
