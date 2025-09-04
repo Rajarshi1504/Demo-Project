@@ -1,6 +1,7 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.Metrics;
@@ -65,8 +66,9 @@ namespace Demo_Project.Pages
 
         public void enterName(string Name)
         {
-            var NameInputField = driver.FindElement(name);
-            NameInputField.SendKeys(Name);
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait.Until(ExpectedConditions.ElementIsVisible(name));
+            driver.FindElement(name).SendKeys(Name);
         }
 
         public void clearText()
