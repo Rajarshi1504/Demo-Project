@@ -32,10 +32,10 @@ namespace Demo_Project.Pages
         private By popupWindowButton => By.Id("PopUp");
         private By selectDayCheckbox(string day) => By.Id(day.ToLower());
 
-        public void EnterName(string Name)
-        {
-            driver.FindElement(name).SendKeys(Name);
-        }
+        //public void EnterName(string Name)
+        //{
+        //    driver.FindElement(name).SendKeys(Name);
+        //}
 
         public void EnterEmailID(string EmailID)
         {
@@ -68,7 +68,7 @@ namespace Demo_Project.Pages
 
         public void enterName(string Name)
         {
-            //waitUntilElementPresent(name, 10);
+            waitUntilElementPresent(name, 10);
             driver.FindElement(name).SendKeys(Name);
         }
 
@@ -80,7 +80,7 @@ namespace Demo_Project.Pages
 
         public void selectCountry(string countryName)
         {
-            //waitUntilElementPresent(countryDropdown, 10);
+            waitUntilElementPresent(countryDropdown, 10);
             var CountryDropDown = driver.FindElement(countryDropdown);
             country = new SelectElement(CountryDropDown);
             country.SelectByText(countryName);
@@ -89,7 +89,7 @@ namespace Demo_Project.Pages
         public void selectDay(string day)
         {
             var daysCheckbox = driver.FindElement(selectDayCheckbox(day));
-            //waitUntilElementPresent(selectDayCheckbox(day), 10);
+            waitUntilElementPresent(selectDayCheckbox(day), 10);
             if (!daysCheckbox.Selected)
             {
                 daysCheckbox.Click();
@@ -127,7 +127,7 @@ namespace Demo_Project.Pages
         }
         public void clickOnOpenWindowButton()
         {
-            //waitUntilElementPresent(popupWindowButton, 10);
+            waitUntilElementPresent(popupWindowButton, 10);
             var openWindowButton = driver.FindElement(popupWindowButton);
             openWindowButton.Click();
         }

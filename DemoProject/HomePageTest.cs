@@ -35,7 +35,7 @@ namespace Demo_Project
         {
             // This is a sample method for demonstration purposes.
             Console.WriteLine("In Test2");
-            homePage.EnterName("Raj");
+            homePage.enterName("Raj");
             homePage.clearText();
             Assert.That(GetDriver().FindElement(By.Id("name")).GetAttribute("value"), Is.EqualTo(""));
         }
