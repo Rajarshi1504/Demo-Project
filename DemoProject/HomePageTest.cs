@@ -53,12 +53,13 @@ namespace Demo_Project
         {
             // This is a sample method for demonstration purposes.
             Console.WriteLine("In Test4");
-            var daysCheckbox = GetDriver().FindElement(By.Id("sunday"));
-            if (!daysCheckbox.Selected)
-            {
-                daysCheckbox.Click();
-            }
-            Assert.That(daysCheckbox.Selected, Is.True);
+            homePage.selectDay("Monday");
+            //var daysCheckbox = GetDriver().FindElement(By.Id("sunday"));
+            //if (!daysCheckbox.Selected)
+            //{
+            //    daysCheckbox.Click();
+            //}
+            
         }
     }
 }

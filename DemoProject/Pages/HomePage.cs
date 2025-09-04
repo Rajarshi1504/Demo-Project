@@ -30,6 +30,7 @@ namespace Demo_Project.Pages
         private By simpleAlertButton => By.Id("alertBtn");
         private By confirmAlertButton => By.Id("confirmBtn");
         private By popupWindowButton => By.Id("PopUp");
+        private By selectDayCheckbox(string day) => By.Id(day.ToLower());
 
         public void EnterName(string Name)
         {
@@ -53,6 +54,7 @@ namespace Demo_Project.Pages
 
         public void doubleClickCopyTextButton()
         {
+            waitUntilElementPresent(copyTextButton, 5);
             var copyTextButtonElement = driver.FindElement(copyTextButton);
             var actions = new Actions(driver);
             actions.DoubleClick(copyTextButtonElement).Perform();
@@ -66,8 +68,7 @@ namespace Demo_Project.Pages
 
         public void enterName(string Name)
         {
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
-            wait.Until(ExpectedConditions.ElementIsVisible(name));
+            waitUntilElementPresent(name, 5);
             driver.FindElement(name).SendKeys(Name);
         }
 
@@ -79,9 +80,21 @@ namespace Demo_Project.Pages
 
         public void selectCountry(string countryName)
         {
+            waitUntilElementPresent(countryDropdown, 5);
             var CountryDropDown = driver.FindElement(countryDropdown);
             country = new SelectElement(CountryDropDown);
             country.SelectByText(countryName);
+        }
+
+        public void selectDay(string day)
+        {
+            var daysCheckbox = driver.FindElement(selectDayCheckbox(day));
+            waitUntilElementPresent(selectDayCheckbox(day), 5);
+            if (!daysCheckbox.Selected)
+            {
+                daysCheckbox.Click();
+            }
+            Assert.That(daysCheckbox.Selected, Is.True);
         }
 
         public void verifySelectedCountry(string expectedCountry)
@@ -97,6 +110,7 @@ namespace Demo_Project.Pages
 
         public void clickOnSimpleAlertButton()
         {
+            waitUntilElementPresent(simpleAlertButton, 5);
             driver.FindElement(simpleAlertButton).Click();
         }
         public void clickOnConfirmationAlertButton()
@@ -113,6 +127,7 @@ namespace Demo_Project.Pages
         }
         public void clickOnOpenWindowButton()
         {
+            waitUntilElementPresent(popupWindowButton, 5);
             var openWindowButton = driver.FindElement(popupWindowButton);
             openWindowButton.Click();
         }

@@ -1,9 +1,12 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Demo_Project.Pages
 {
@@ -46,6 +49,12 @@ namespace Demo_Project.Pages
             {
                 // No alert to dismiss
             }
+        }
+
+        public void waitUntilElementPresent(By element, int timeinseconds)
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeinseconds));
+            wait.Until(ExpectedConditions.ElementIsVisible(element));
         }
     }
 }
