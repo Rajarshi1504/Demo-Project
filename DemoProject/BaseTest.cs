@@ -47,7 +47,11 @@ namespace Demo_Project
             switch (BrowserName)
             {
                 case "Chrome":
-                    return new ChromeDriver();
+                    var chromeOptions = new ChromeOptions();
+                    // Uncomment below if you need a unique user data dir for each session
+                    string uniqueUserDataDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
+                    chromeOptions.AddArgument($"--user-data-dir={uniqueUserDataDir}");
+                    return new ChromeDriver(chromeOptions);
                 case "FireFox":
                     return new FirefoxDriver();
                 case "Edge":
