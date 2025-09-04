@@ -54,7 +54,7 @@ namespace Demo_Project.Pages
 
         public void doubleClickCopyTextButton()
         {
-            waitUntilElementPresent(copyTextButton, 10);
+            //waitUntilElementPresent(copyTextButton, 10);
             var copyTextButtonElement = driver.FindElement(copyTextButton);
             var actions = new Actions(driver);
             actions.DoubleClick(copyTextButtonElement).Perform();
@@ -68,7 +68,7 @@ namespace Demo_Project.Pages
 
         public void enterName(string Name)
         {
-            waitUntilElementPresent(name, 10);
+            //waitUntilElementPresent(name, 10);
             driver.FindElement(name).SendKeys(Name);
         }
 
@@ -80,7 +80,7 @@ namespace Demo_Project.Pages
 
         public void selectCountry(string countryName)
         {
-            waitUntilElementPresent(countryDropdown, 10);
+            //waitUntilElementPresent(countryDropdown, 10);
             var CountryDropDown = driver.FindElement(countryDropdown);
             country = new SelectElement(CountryDropDown);
             country.SelectByText(countryName);
@@ -89,7 +89,7 @@ namespace Demo_Project.Pages
         public void selectDay(string day)
         {
             var daysCheckbox = driver.FindElement(selectDayCheckbox(day));
-            waitUntilElementPresent(selectDayCheckbox(day), 10);
+            //waitUntilElementPresent(selectDayCheckbox(day), 10);
             if (!daysCheckbox.Selected)
             {
                 daysCheckbox.Click();
@@ -110,7 +110,7 @@ namespace Demo_Project.Pages
 
         public void clickOnSimpleAlertButton()
         {
-            waitUntilElementPresent(simpleAlertButton, 10);
+            //waitUntilElementPresent(simpleAlertButton, 10);
             driver.FindElement(simpleAlertButton).Click();
         }
         public void clickOnConfirmationAlertButton()
@@ -127,7 +127,7 @@ namespace Demo_Project.Pages
         }
         public void clickOnOpenWindowButton()
         {
-            waitUntilElementPresent(popupWindowButton, 10);
+            //waitUntilElementPresent(popupWindowButton, 10);
             var openWindowButton = driver.FindElement(popupWindowButton);
             openWindowButton.Click();
         }
