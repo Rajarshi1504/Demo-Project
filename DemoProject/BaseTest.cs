@@ -48,9 +48,11 @@ namespace Demo_Project
             {
                 case "Chrome":
                     var chromeOptions = new ChromeOptions();
-                    // Uncomment below if you need a unique user data dir for each session
                     string uniqueUserDataDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
                     chromeOptions.AddArgument($"--user-data-dir={uniqueUserDataDir}");
+                    chromeOptions.AddArgument("--headless=new");
+                    chromeOptions.AddArgument("--no-sandbox");
+                    chromeOptions.AddArgument("--disable-dev-shm-usage");
                     return new ChromeDriver(chromeOptions);
                 case "FireFox":
                     return new FirefoxDriver();
