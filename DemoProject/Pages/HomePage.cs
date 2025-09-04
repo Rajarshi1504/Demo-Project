@@ -110,7 +110,7 @@ namespace Demo_Project.Pages
 
         public void clickOnSimpleAlertButton()
         {
-            //waitUntilElementPresent(simpleAlertButton, 10);
+            waitUntilElementPresent(simpleAlertButton, 10);
             driver.FindElement(simpleAlertButton).Click();
         }
         public void clickOnConfirmationAlertButton()
