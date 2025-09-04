@@ -40,7 +40,6 @@ namespace Demo_Project
         [Test]
         public void handleWindows()
         {
-            Thread.Sleep(2000);
             homePage.clickOnOpenWindowButton();
             Thread.Sleep(2000);
             homePage.switchToNewWindow();

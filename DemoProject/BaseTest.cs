@@ -2,6 +2,7 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace Demo_Project
             driver = CreateDriver(ConfigurationProvider.configuation["browser"]);
             driver.Navigate().GoToUrl("https://testautomationpractice.blogspot.com/");
             driver.Manage().Window.Maximize();
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(5));
+            wait.Until(drv => drv.Title.Length > 0); // Wait until the page title is loaded
         }
 
         [TearDown]
