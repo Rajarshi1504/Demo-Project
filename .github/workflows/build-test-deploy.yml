@@ -15,10 +15,10 @@ jobs:
            dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore "DemoProject.csproj"
+        run: dotnet restore DemoProject.csproj
 
       - name: Build
-        run: dotnet build "DemoProject.csproj" --configuration Release
+        run: dotnet build DemoProject.csproj --configuration Release
 
       - name: Test
-        run: dotnet test "DemoProject.csproj" --verbosity normal
+        run: dotnet test DemoProject.csproj --verbosity normal
