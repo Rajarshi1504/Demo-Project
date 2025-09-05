@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Demo_Project
@@ -26,7 +27,8 @@ namespace Demo_Project
             Console.WriteLine("Hello, World!");
             driver = CreateDriver(ConfigurationProvider.configuation["browser"]);
             driver.Navigate().GoToUrl("https://testautomationpractice.blogspot.com/");
-            driver.Manage().Window.Maximize();
+            
+            //driver.Manage().Window.Maximize();
             // Replace this line:
             // IJavaScriptExecutor js = (IJavaScriptExecutor)driver.getJavascriptExecutor();
             // With the following:
@@ -55,12 +57,37 @@ namespace Demo_Project
             {
                 case "Chrome":
                     var chromeOptions = new ChromeOptions();
+                    chromeOptions.UnhandledPromptBehavior = UnhandledPromptBehavior.Ignore;
+                    var svc = ChromeDriverService.CreateDefaultService();
+                    svc.Start();
+                    string headlessWindowResolution = ConfigurationProvider.configuation["HeadlessWindowResolution"];
+                    if (!String.IsNullOrEmpty(headlessWindowResolution))
+
+                    {
+                        string pattern = @"^[1-9][0-9]{2,3}x[1-9][0-9]{2,3}$";
+                        Regex rg = new Regex(pattern, RegexOptions.IgnoreCase);
+
+                        //format of providing the resolution would be 1920x1080
+                        if (rg.Match(headlessWindowResolution).Success)
+                        {
+                            headlessWindowResolution = headlessWindowResolution.ToLower().Replace('x', ',');
+                        }
+                        else
+                        {
+                            //if user is not providing the resolution in 1920X1080 format then it will default it to 1920x1080
+                            headlessWindowResolution = "1920,1080";
+                        }
+                    }
+                    else
+                    {
+                        headlessWindowResolution = "1920,1080";
+                    }
                     string uniqueUserDataDir = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
                     chromeOptions.AddArgument($"--user-data-dir={uniqueUserDataDir}");
                     chromeOptions.AddArgument("--headless=new");
                     chromeOptions.AddArgument("--no-sandbox");
                     chromeOptions.AddArgument("--disable-dev-shm-usage");
-                    return new ChromeDriver(chromeOptions);
+                    return new ChromeDriver(svc, chromeOptions);
                 case "FireFox":
                     return new FirefoxDriver();
                 case "Edge":
