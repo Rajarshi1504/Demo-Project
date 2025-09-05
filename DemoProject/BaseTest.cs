@@ -27,8 +27,12 @@ namespace Demo_Project
             driver = CreateDriver(ConfigurationProvider.configuation["browser"]);
             driver.Navigate().GoToUrl("https://testautomationpractice.blogspot.com/");
             driver.Manage().Window.Maximize();
-            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(10));
-            wait.Until(drv => drv.Title.Length > 0); // Wait until the page title is loaded
+            // Replace this line:
+            // IJavaScriptExecutor js = (IJavaScriptExecutor)driver.getJavascriptExecutor();
+            // With the following:
+            IJavaScriptExecutor js = (IJavaScriptExecutor)driver;
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(30));
+            wait.Until(d => js.ExecuteScript("return document.readyState").Equals("complete"));
         }
 
         [TearDown]
